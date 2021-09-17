@@ -1,3 +1,4 @@
+--ma8dc https://github.com/matafs/cs2120.git
 /-
 EQUALITY
 -/
