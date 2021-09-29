@@ -60,6 +60,12 @@ end
 -- 5
 theorem demorgan_1 : ∀ (P Q : Prop), ¬ (P ∧ Q) ↔ ¬ P ∨ ¬ Q :=
 begin
+  assume P Q,
+  apply iff.intro,
+  -- forward
+  assume h,
+  
+
 end
 
 
