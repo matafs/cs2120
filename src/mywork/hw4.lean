@@ -161,12 +161,7 @@ begin
   apply or.intro_left,
   cases em P with p np,
   exact p,
-  cases em Q with q nq,
-  have porr := and.elim_right h,
-  apply or.elim porr,
-  assume p,
-  exact p,
-  assume r,
+  
 
 
 end
