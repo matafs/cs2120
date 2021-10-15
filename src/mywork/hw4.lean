@@ -157,13 +157,28 @@ begin
   apply iff.intro,
   -- forward
   assume h,
-  have porq := and.elim_left h,
+  cases h with pq pr,
+  cases pq with p q,
   apply or.intro_left,
-  cases em P with p np,
   exact p,
-  
-
-
+  cases pr with p r,
+  apply or.intro_left,
+  exact p,
+  apply or.intro_right,
+  exact and.intro q r,
+  -- backward
+  assume h,
+  cases h with p qr,
+  apply and.intro,
+  apply or.intro_left,
+  exact p,
+  apply or.intro_left,
+  exact p,
+  apply and.intro,
+  apply or.intro_right,
+  exact and.elim_left qr,
+  apply or.intro_right,
+  exact and.elim_right qr,
 end
 
 -- remember or is right associative
@@ -178,8 +193,48 @@ begin
   apply iff.intro,
   -- forward
   assume h,
-
-
+  cases h with pq rs,
+  cases pq with p q,
+  cases rs with r s,
+  apply or.intro_left,
+  exact and.intro p r,
+  apply or.intro_right,
+  apply or.intro_left,
+  exact and.intro p s,
+  cases rs with r s,
+  apply or.intro_right,
+  apply or.intro_right,
+  apply or.intro_left,
+  exact and.intro q r,
+  apply or.intro_right,
+  apply or.intro_right,
+  apply or.intro_right,
+  exact and.intro q s,
+  -- backward
+  assume h,
+  cases h with pr,
+  apply and.intro,
+  apply or.intro_left,
+  exact and.elim_left pr,
+  apply or.intro_left,
+  exact and.elim_right pr,
+  cases h with ps,
+  apply and.intro,
+  apply or.intro_left,
+  exact and.elim_left ps,
+  apply or.intro_right,
+  exact and.elim_right ps,
+  cases h with qr,
+  apply and.intro,
+  apply or.intro_right,
+  exact and.elim_left qr,
+  apply or.intro_left,
+  exact and.elim_right qr,
+  apply and.intro,
+  apply or.intro_right,
+  exact and.elim_left h,
+  apply or.intro_right,
+  exact and.elim_right h,
 end
 
 

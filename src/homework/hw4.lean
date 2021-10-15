@@ -4,7 +4,7 @@ begin
   -- ¬ (0 = 1)
   -- (0 = 1) → false
   assume h,
-  cases h,
+  trivial,
 end
 
 
@@ -12,7 +12,8 @@ end
 example : 0 ≠ 0 → 2 = 3 :=
 begin
   assume h,
-  have f : false := h (eq.refl 0),
+  have zeqz := eq.refl 0,
+  have f : false := h zeqz,
   exact false.elim (f),
 end
 
@@ -61,17 +62,41 @@ end
 theorem demorgan_1 : ∀ (P Q : Prop), ¬ (P ∧ Q) ↔ ¬ P ∨ ¬ Q :=
 begin
   assume P Q,
+<<<<<<< HEAD
   apply iff.intro,
   -- forward
   assume h,
   
 
+=======
+  split,
+  -- forward
+  assume h,
+  cases (classical.em P) with p np,
+  cases (classical.em Q) with q nq,
+  have pq := and.intro p q,
+  contradiction,
+  exact or.inr nq,
+  exact or.inl np,
+  -- backward
+  admit,
+>>>>>>> fcba5ad44160653f0c0421bdee35d9d0532b3390
 end
 
 
 -- 6
-theorem demorgan_2 : ∀ (P Q : Prop), ¬ (P ∨ Q) → ¬P ∧ ¬Q :=
+theorem demorgan_2 : ∀ (P Q : Prop), ¬ (P ∨ Q) → (¬P ∧ ¬Q) :=
 begin
+  assume P Q,
+  assume h,
+  cases (classical.em P) with p np,
+  cases (classical.em Q) with q nq,
+  have porq := or.intro_left Q p,
+  contradiction,
+  have porq := or.intro_left Q p,
+  contradiction,
+  cases (classical.em Q) with q nq,
+
 end
 
 
@@ -123,3 +148,8 @@ example : ∀ (P Q : Prop), ( ¬P → ¬Q) → (Q → P) :=
 begin
 end
 
+
+
+axioms (T : Type) (Q : Prop) (f : ∀ (t : T), Q) (t : T)
+example : Q := f t
+#check f
